@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import ExportButton from '@/sidepanel/components/ExportButton.vue'
-import ImportButton from '@/sidepanel/components/ImportButton.vue'
-import LightDarkSwitch from '@/sidepanel/components/LightDarkSwitch.vue'
+import ExportButton from '@/sidepanel/components/toolbar/actions/ExportButton.vue'
+import ImportButton from '@/sidepanel/components/toolbar/actions/ImportButton.vue'
+import LightDarkSwitch from '@/sidepanel/components/toolbar/actions/LightDarkSwitch.vue'
 </script>
 
 <template>
