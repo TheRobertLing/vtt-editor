@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import ToolBar from '@/sidepanel/components/toolbar/ToolBar.vue'
-import VTTEditor from '@/sidepanel/components/editor/VTTEditor.vue'
 import AppLayout from '@/sidepanel/layout/AppLayout.vue'
+import { Toaster } from '@/sidepanel/components/ui/sonner'
+import 'vue-sonner/style.css'
+import VTTEditor from '@/sidepanel/features/vtt-editor/components/VTTEditor.vue'
 </script>
 
 <template>
@@ -13,4 +15,6 @@ import AppLayout from '@/sidepanel/layout/AppLayout.vue'
       <VTTEditor />
     </template>
   </AppLayout>
+  <!-- Global controllers -->
+  <Toaster rich-colors />
 </template>

@@ -8,7 +8,7 @@ import LightDarkSwitch from '@/sidepanel/components/toolbar/actions/LightDarkSwi
   <div class="flex flex-wrap items-center gap-2 p-2">
     <ImportButton />
     <ExportButton />
-    <div class="flex-1"></div>
+    <div class="flex-1" />
     <LightDarkSwitch />
   </div>
 </template>
