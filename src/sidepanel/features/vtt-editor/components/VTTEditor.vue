@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { Codemirror } from 'vue-codemirror'
 import { storeToRefs } from 'pinia'
-import { useVTTStore } from '@/sidepanel/features/vtt-editor/stores/useVTTStore'
-import { extensions } from '@/sidepanel/features/vtt-editor/extensions'
+import { useVTTStore } from '../stores/useVTTStore'
+import { extensions } from '../extensions'
 
 // The responsibility of the VTTEditor is to wrap the existing functionality of the Codemirror editor
 // To make it specifically oriented for VTT editing and nothing else.

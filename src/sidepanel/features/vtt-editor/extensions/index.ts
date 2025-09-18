@@ -1,8 +1,6 @@
 import {
   EditorView,
   lineNumbers,
-  highlightActiveLine,
-  highlightActiveLineGutter,
   highlightSpecialChars,
   drawSelection,
   dropCursor,
@@ -13,12 +11,14 @@ import { keymap } from '@codemirror/view'
 import { EditorState } from '@codemirror/state'
 import { defaultKeymap, history, historyKeymap } from '@codemirror/commands'
 import { highlightSelectionMatches, searchKeymap } from '@codemirror/search'
-import { lintGutter, lintKeymap } from '@codemirror/lint'
+import { lintGutter, lintKeymap, linter, type Diagnostic } from '@codemirror/lint'
+import { WebVTTParser } from 'webvtt-parser'
 import {
   bracketMatching,
   indentOnInput,
   HighlightStyle,
   syntaxHighlighting,
+  StreamLanguage,
 } from '@codemirror/language'
 import {
   autocompletion,
@@ -64,7 +64,6 @@ const customTheme = EditorView.theme({
     caretColor: colors.caret,
     padding: '0 0',
   },
-
   '.cm-cursor, .cm-dropCursor': { borderLeftColor: colors.caret },
   '&.cm-focused > .cm-scroller > .cm-selectionLayer .cm-selectionBackground, .cm-selectionBackground, .cm-content ::selection':
     {
@@ -168,9 +167,90 @@ const customHighlightStyle = HighlightStyle.define([
  * Linting and Syntax
  */
 
+type VTTState = {
+  sawHeader: boolean
+  inCue: boolean
+}
+
+const TIME = String.raw`(?:\d{2}:)?\d{2}:\d{2}\.\d{3}`
+const TIMING_LINE = new RegExp(`^${TIME}\\s*-->\\s*${TIME}(?:\\s+.*)?$`)
+
+const vttLanguage = StreamLanguage.define<VTTState>({
+  name: 'vtt',
+
+  startState() {
+    return { sawHeader: false, inCue: false }
+  },
+
+  token(stream, state) {
+    // Header: only recognize on the very first non-empty line
+    if (!state.sawHeader && stream.sol()) {
+      const line = stream.string
+      if (/^\uFEFF?WEBVTT(?:[ \t][^\r\n]*)?$/.test(line)) {
+        state.sawHeader = true
+        stream.skipToEnd()
+        return 'keyword'
+      }
+
+      if (!/^\s*$/.test(line)) state.sawHeader = true
+    }
+
+    // Timestamp line (opens/continues a cue block)
+    if (stream.sol() && TIMING_LINE.test(stream.string)) {
+      state.inCue = true
+      stream.skipToEnd()
+      return 'number'
+    }
+
+    if (state.inCue && !/^\s*$/.test(stream.string)) {
+      stream.skipToEnd()
+      return 'string'
+    }
+
+    stream.skipToEnd()
+    return 'meta'
+  },
+
+  blankLine(state) {
+    state.inCue = false
+  },
+})
+
+const vttLinter = linter(
+  (view) => {
+    const text = view.state.doc.toString()
+    const parser = new WebVTTParser()
+    const { errors = [] } = parser.parse(text)
+
+    const doc = view.state.doc
+    const lineCount = doc.lines
+
+    const diagnostics: Diagnostic[] = errors.map((err) => {
+      const lineNumber = Math.min(err.line ?? 1, lineCount)
+      const lineInfo = doc.line(lineNumber)
+
+      const colOffset = Math.max((err.col ?? 1) - 1, 0)
+      const from = Math.min(lineInfo.from + colOffset, lineInfo.to)
+      const to = Math.min(from + 1, lineInfo.to)
+
+      return {
+        from,
+        to,
+        severity: 'error',
+        message: err.message ?? 'VTT parsing error',
+      }
+    })
+
+    return diagnostics
+  },
+  {
+    delay: 100,
+  },
+)
+
 export const extensions = [
   lineNumbers(),
-  highlightActiveLineGutter(),
+  //highlightActiveLineGutter(),
   highlightSpecialChars(),
   history(),
   drawSelection(),
@@ -182,7 +262,7 @@ export const extensions = [
   autocompletion(),
   rectangularSelection(),
   crosshairCursor(),
-  highlightActiveLine(),
+  //highlightActiveLine(),
   highlightSelectionMatches(),
   keymap.of([
     ...closeBracketsKeymap,
@@ -196,4 +276,6 @@ export const extensions = [
   EditorView.lineWrapping,
   customTheme,
   syntaxHighlighting(customHighlightStyle),
+  vttLanguage,
+  vttLinter,
 ]

@@ -54,6 +54,10 @@
   --shadow-lg: var(--shadow-lg);
   --shadow-xl: var(--shadow-xl);
   --shadow-2xl: var(--shadow-2xl);
+
+  /** Custom */
+  --color-muted-transparent: var(--muted-transparent);
+  --color-accent-transparent: var(--accent-transparent);
 }
 
 :root {
@@ -103,8 +107,12 @@
   --shadow-2xl: 0px 2px 0px 0px hsl(0 0% 20% / 0.38);
   --tracking-normal: 0em;
   --spacing: 0.25rem;
+
+  /** Custom */
   --scrollbar-track: oklch(0.9911 0 0);
   --scrollbar-thumb: auto;
+  --muted-transparent: oklch(88.531% 0.0001 271.152 / 0.7);
+  --accent-transparent: oklch(80.78% 0.00009 271.152 / 0.7);
 }
 
 .dark {
@@ -151,9 +159,13 @@
   --shadow-md: 0px 2px 0px 0px hsl(0 0% 20% / 0.15), 0px 2px 4px -1px hsl(0 0% 20% / 0.15);
   --shadow-lg: 0px 2px 0px 0px hsl(0 0% 20% / 0.15), 0px 4px 6px -1px hsl(0 0% 20% / 0.15);
   --shadow-xl: 0px 2px 0px 0px hsl(0 0% 20% / 0.15), 0px 8px 10px -1px hsl(0 0% 20% / 0.15);
+
+  /** Custom */
   --shadow-2xl: 0px 2px 0px 0px hsl(0 0% 20% / 0.38);
   --scrollbar-track: oklch(0.2178 0 0);
   --scrollbar-thumb: oklch(0.5452 0 0);
+  --muted-transparent: oklch(28.5% 0.0001 271.152 / 0.7);
+  --accent-transparent: oklch(37.15% 0.00009 271.152 / 0.7);
 }
 
 body {
