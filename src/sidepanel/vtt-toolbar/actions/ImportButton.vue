@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useFileDialog } from '@vueuse/core'
-import { Button } from '@/sidepanel/components/ui/button'
+import { Button } from '@/sidepanel/ui/button'
 import { Upload } from 'lucide-vue-next'
 import { useVTTStore } from '@/sidepanel/stores/useVTTStore'
 import { toast } from 'vue-sonner'

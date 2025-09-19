@@ -12,8 +12,8 @@
   "aliases": {
     "components": "@/sidepanel/components",
     "composables": "@/sidepanel/composables",
-    "utils": "@/sidepanel/utils/ui/index.ts",
-    "ui": "@/sidepanel/components/ui",
+    "utils": "@/sidepanel/ui/index.ts",
+    "ui": "@/sidepanel/ui",
     "lib": "@/sidepanel/lib"
   },
   "iconLibrary": "lucide"

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Button } from '@/sidepanel/components/ui/button'
+import { Button } from '@/sidepanel/ui/button'
 import { useVTTStore } from '@/sidepanel/stores/useVTTStore'
 import { Download } from 'lucide-vue-next'
 

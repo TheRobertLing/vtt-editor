@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Switch } from '@/sidepanel/components/ui/switch'
+import { Switch } from '@/sidepanel/ui/switch'
 import { useThemeStore } from '@/sidepanel/stores/useThemeStore'
 import { Moon, Sun } from 'lucide-vue-next'
 

@@ -1,20 +1,23 @@
 <script setup lang="ts">
-import ToolBar from '@/sidepanel/components/toolbar/ToolBar.vue'
-import AppLayout from '@/sidepanel/layout/AppLayout.vue'
-import { Toaster } from '@/sidepanel/components/ui/sonner'
+import ToolBar from '@/sidepanel/vtt-toolbar/ToolBar.vue'
+import VTTEditor from '@/sidepanel/vtt-editor/components/VTTEditor.vue'
+import { TooltipProvider } from '@/sidepanel/ui/tooltip'
+import { Toaster } from '@/sidepanel/ui/sonner'
 import 'vue-sonner/style.css'
-import VTTEditor from '@/sidepanel/features/vtt-editor/components/VTTEditor.vue'
 </script>
 
 <template>
-  <AppLayout>
-    <template #toolbar>
-      <ToolBar />
-    </template>
-    <template #editor>
-      <VTTEditor />
-    </template>
-  </AppLayout>
+  <TooltipProvider>
+    <div class="h-screen flex flex-col">
+      <div class="border-b">
+        <ToolBar />
+      </div>
+      <div class="flex-1 min-h-0">
+        <VTTEditor />
+      </div>
+    </div>
+  </TooltipProvider>
+
   <!-- Global controllers -->
   <Toaster rich-colors />
 </template>
