@@ -5,16 +5,20 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
-  root: 'src/sidepanel',
+  root: fileURLToPath(new URL('./src/sidepanel', import.meta.url)),
   publicDir: fileURLToPath(new URL('./public', import.meta.url)),
-  plugins: [vue(), vueDevTools(), tailwindcss()],
+  plugins: [
+    vue(),
+    vueDevTools(),
+    tailwindcss(),
+  ],
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
   build: {
-    outDir: fileURLToPath(new URL('./dist', import.meta.url)),
+    outDir: '../../dist', // THis is relative to root so need to go 2 levels up
     emptyOutDir: true,
     rollupOptions: {
       input: {

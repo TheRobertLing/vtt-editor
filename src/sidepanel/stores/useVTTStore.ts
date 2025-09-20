@@ -4,29 +4,33 @@ import { ref } from 'vue'
 export const useVTTStore = defineStore('vtt', () => {
   const vtt = ref('WEBVTT')
 
-  async function importVTT(file: File): Promise<void> {
-    try {
-      vtt.value = await file.text()
-    } catch (err) {
-      throw new Error('Error in loading file: ' + err)
+  function loadFile(files: FileList | null) {
+    if (!files || files.length === 0) {
+      return
     }
+    const file = files[0]
+
+    const reader = new FileReader()
+    reader.onload = (event) => {
+      if (event.target?.result) {
+        vtt.value = event.target.result as string
+      }
+    }
+    reader.readAsText(file)
   }
 
-  function exportVTT(): void {
+  function saveFile() {
     const blob = new Blob([vtt.value], { type: 'text/vtt;charset=utf-8' })
     const url = URL.createObjectURL(blob)
 
-    const link = document.createElement('a')
-    link.setAttribute('href', url)
-    link.setAttribute('download', 'transcript.vtt')
-    console.log(link)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = 'subtitles.vtt'
+    a.click()
 
-    document.body.appendChild(link)
-    link.click()
-    document.body.removeChild(link)
-
+    a.remove()
     URL.revokeObjectURL(url)
   }
 
-  return { vtt, importVTT, exportVTT }
+  return { vtt, loadFile, saveFile }
 })
