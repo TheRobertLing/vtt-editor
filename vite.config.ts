@@ -7,11 +7,7 @@ import tailwindcss from '@tailwindcss/vite'
 export default defineConfig({
   root: fileURLToPath(new URL('./src/sidepanel', import.meta.url)),
   publicDir: fileURLToPath(new URL('./public', import.meta.url)),
-  plugins: [
-    vue(),
-    vueDevTools(),
-    tailwindcss(),
-  ],
+  plugins: [vue(), vueDevTools(), tailwindcss()],
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
