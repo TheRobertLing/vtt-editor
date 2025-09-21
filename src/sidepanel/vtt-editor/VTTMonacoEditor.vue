@@ -6,9 +6,6 @@ import { useVTTStore } from '../stores/useVTTStore'
 const isDark = useDark()
 const vtt = useVTTStore()
 
-const handleMount = () => {
-  console.log('Monaco Editor mounted:')
-}
 </script>
 
 <template>
@@ -23,6 +20,5 @@ const handleMount = () => {
       scrollBeyondLastLine: false,
       renderLineHighlight: 'none',
     }"
-    @mount="handleMount"
   />
 </template>

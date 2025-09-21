@@ -7,7 +7,7 @@ import { FolderOpen } from 'lucide-vue-next'
 
 const store = useVTTStore()
 const { open, onChange } = useFileDialog({
-  accept: 'text/vtt',
+  accept: '.vtt',
   multiple: false,
 })
 
@@ -23,6 +23,6 @@ onChange((files) => {
         <FolderOpen />
       </Button>
     </TooltipTrigger>
-    <TooltipContent> Open VTT File </TooltipContent>
+    <TooltipContent align="start"> Open VTT File </TooltipContent>
   </Tooltip>
 </template>

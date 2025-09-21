@@ -6,7 +6,6 @@ import { Save } from 'lucide-vue-next'
 
 const store = useVTTStore()
 </script>
-
 <template>
   <Tooltip>
     <TooltipTrigger as-child>

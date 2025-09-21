@@ -1,64 +1,40 @@
-# VTTEditorExtension
+# VTT Editor Extension
 
-This template should help get you started developing with Vue 3 in Vite.
+A Chrome extension for creating and editing **WebVTT subtitle files** directly in the browser using the side panel.
 
-## Recommended IDE Setup
+## Changelog
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+### v0.1.0 _(Current)_
 
-## Type Support for `.vue` Imports in TS
+- Basic VTT file loading and saving
+- Monaco Editor integration with syntax highlighting
+- Dark/light theme toggle with system detection
+- Minimal toolbar with tooltips
+- Extension side panel setup
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+---
 
-## Customize configuration
+### v0.2.0 _(Next Release)_
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+- VTT format validation with real-time error highlighting
+- Find and replace functionality
+- Drag & drop support for file handling
+- Improved error messages and feedback
 
-## Project Setup
+---
 
-```sh
-npm install
-```
+### v0.3.0
 
-### Compile and Hot-Reload for Development
+- Video preview with subtitle synchronization
+- Timeline-based visual subtitle editor
+- Time shifting and bulk editing operations
+- Configurable keyboard shortcuts
 
-```sh
-npm run dev
-```
+---
 
-### Type-Check, Compile and Minify for Production
+### v1.0.0
 
-```sh
-npm run build
-```
-
-### Run Unit Tests with [Vitest](https://vitest.dev/)
-
-```sh
-npm run test:unit
-```
-
-### Run End-to-End Tests with [Playwright](https://playwright.dev)
-
-```sh
-# Install browsers for the first run
-npx playwright install
-
-# When testing on CI, must build the project first
-npm run build
-
-# Runs the end-to-end tests
-npm run test:e2e
-# Runs the tests only on Chromium
-npm run test:e2e -- --project=chromium
-# Runs the tests of a specific file
-npm run test:e2e -- tests/example.spec.ts
-# Runs the tests in debug mode
-npm run test:e2e -- --debug
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+- Full subtitle editing suite
+- YouTube integration
+- Support for multiple formats (VTT, SRT, ASS, etc.)
+- Advanced editing and automation features
